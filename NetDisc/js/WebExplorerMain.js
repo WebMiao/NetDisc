@@ -66,6 +66,7 @@ var list = null; //the file be specify
 var cutCopyOperation = null; //define current opertaions
 var cutCopyFiles = null; //define thefile be operated
 var currentEditFile = null; //the file need to be edited
+var tempHTMLContent = null;
 
 function switchEditor() {
     getEditorContent(); //Firstly, get the content
@@ -76,27 +77,17 @@ function switchEditor() {
     } else {
         isRichEditor = true;
         //create editor
-        createEditor();
+        oCKeditor = CKEDITOR.replace('FileContentTextArea');
     }
-}
-
-//create a editor
-function createEditor() {
-    if (oCKeditor == null) {
-        oCKeditor = new ckeditor('FileContentTextArea');
-        oCKeditor.BasePath = "../ckeditor/";
-        oCKeditor.Width = '600';
-        oCKeditor.Height = '400';
-        oCKeditor.ToolbarSet = 'dialog';
-        oCKeditor.Config['FullPage'] = true;
-    }
-    oCKeditor.ReplaceTextarea();
 }
 
 //get the content of the editor
 function getEditorContent() {
     if (isRichEditor) {
-        currentContent = oEditor.GetXHTML(true); //call the function defined in CKEditor
+        currentContent = CKEDITOR.instances.FileContentTextArea.getData().value;
+        //$('FileContentTextArea').value;
+            //.getData();
+            //oEditor.GetXHTML(true); //call the function defined in CKEditor
     } else {
         currentContent = textareaEditor.value;
     }
