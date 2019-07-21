@@ -1,49 +1,49 @@
-﻿.zxjayDialog_border
+﻿.Dialog_border
 {
 	border: solid 1px #69c;
 	font-size: 12px;
 	float: left;
-	width: 100%;
+	width: 220%;
 	clear: both;
 }
-.zxjayDialog_titleBar
+.Dialog_titleBar
 {
 	-moz-user-select: none;
 	height: 26px;
 	background: url(title_bg.gif) repeat-x;
 	cursor: move;
 }
-.zxjayDialog_ico
+.Dialog_ico
 {
 	margin: 5px;
 	float: left;
 }
-.zxjayDialog_titleText
+.Dialog_titleText
 {
 	padding-top: 7px;
 	float: left;
 }
-.zxjayDialog_titleCloseButton
+.Dialog_titleCloseButton
 {
 	margin-top: 9px;
 	margin-right: 8px;
 	float: right;
 	cursor: pointer;
 }
-.zxjayDialog_content
+.Dialog_content
 {
 	background-color: White;
 	padding: 20px 10px 20px 10px;
 	text-align: center;
 }
-.zxjayDialog_buttonPanel
+.Dialog_buttonPanel
 {
 	height: 46px;
 	background: url(btnpanel_bg.gif) repeat-x;
 	width: 100%;
 	text-align: center;
 }
-.zxjayDialog_commandButton
+.Dialog_commandButton
 {
 	border: none;
 	margin-top: 10px;
