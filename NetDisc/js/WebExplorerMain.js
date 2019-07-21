@@ -112,7 +112,7 @@ function saveNewFile() {
     dialog.Text = "Note";
     if (result == "OK") {
         dialog.Content = "The file is created successfully";
-        currentNode.Refresh(); 
+        currentNode.Refresh();
         fileEditor.Hide();
     }
 }
@@ -177,7 +177,7 @@ editFile = function (fname) {
 
 //read the file on the server
 loadFileContent = function (fname) {
-    var url = defaultURL + "?action=GETEDITFILE&value1=" + encodeURIComponent(currentNode.path + fileName);
+    var url = defaultURL + "?action=GETEDITFILE&value1=" + encodeURIComponent(currentNode.path + fname);
     var content = executeHttpRequest("GET", url, null);
 
     if (content == "ERROR") {

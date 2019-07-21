@@ -30,7 +30,7 @@ function TreeNode()
     this.container = null;
     this.childArea = null;
     this.parent = null;
-    this.path = "~/";
+    this.path = "~/TestFiles/";
 
     this.Show = function()
     {
@@ -384,7 +384,7 @@ var clickDirectory = function(cNode)
     currentNode.childArea.style.display = "";
     currentNode = cNode;
     currentNode.SetCurrentStatus();
-    currentNode.Refersh();
+    currentNode.Refresh();
 }
 
 var clickFile = function(fName)
