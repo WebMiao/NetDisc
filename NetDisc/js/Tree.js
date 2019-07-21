@@ -9,7 +9,7 @@ var image =
         Empty: imgPath + "empty.gif",
         Plus: imgPath + "plus_m.gif",
         Minus: imgPath + "minus_m.gif",
-        Folder: imgPath + "folder.gif",
+        Folder: imgPath + "folder.png",
         Unknown: imgPath + "unknow.gif",
         Rename: imgPath + "rename.gif"
     };
@@ -241,12 +241,12 @@ var createFileView = function(fileName, isFolder, fileSize, modifyDate)
 
     if (isFolder)
     {
-        fileImg = createImage(imgPath + "dir.gif");
+        fileImg = createImage(imgPath + "openedfolder.png");
         fileImg.alt = "文件夹";
     }
     else
     {
-        fileImg = createImage(imgPath + imgSource + ".gif");
+        fileImg = createImage(imgPath + imgSource + ".png");
         fileImg.alt = imgSource + "文件";
     }
 
