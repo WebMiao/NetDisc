@@ -84,7 +84,8 @@ function switchEditor() {
 //get the content of the editor
 function getEditorContent() {
     if (isRichEditor) {
-        currentContent = CKEDITOR.instances.FileContentTextArea.getData().value;
+        currentContent = CKEDITOR.instances.FileContentTextArea.getData().substring(3, CKEDITOR.instances.FileContentTextArea.getData().length-5);
+            //CKEDITOR.instances.FileContentTextArea.getData().value;
         //$('FileContentTextArea').value;
             //.getData();
             //oEditor.GetXHTML(true); //call the function defined in CKEditor
