@@ -73,24 +73,7 @@ function switchEditor() {
         isRichEditor = false; //already get the content
         // create a new file
         newFile();
-    } else {
-        isRichEditor = true;
-        //create editor
-        createEditor();
     }
-}
-
-//create a editor
-function createEditor() {
-    if (oCKeditor == null) {
-        oCKeditor = new ckeditor('FileContentTextArea');
-        oCKeditor.BasePath = "../ckeditor/";
-        oCKeditor.Width = '600';
-        oCKeditor.Height = '400';
-        oCKeditor.ToolbarSet = 'dialog';
-        oCKeditor.Config['FullPage'] = true;
-    }
-    oCKeditor.ReplaceTextarea();
 }
 
 //get the content of the editor
