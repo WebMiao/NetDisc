@@ -38,6 +38,9 @@ namespace NetDisc
                 case "GETEDITFILE": //read file content
                     GetEditFileContent(context);
                     break;
+                case "SAVAEDITFILE": //save the editted file
+                    SaveFile(context,false);
+                    break;
                 }
         }
 
@@ -147,6 +150,26 @@ namespace NetDisc
         {
             string path = context.Server.MapPath(context.Request["value1"]);
             context.Response.Write(File.ReadAllText(path, Encoding.UTF8));
+        }
+
+        /// <summary>
+        /// save the file that is already editted / newly created
+        /// </summary>
+        /// <param name="context"></param>
+        private void SaveFile(HttpContext context, bool isNew)
+        {
+            //get the  physical path of file
+            string path = context.Server.MapPath(context.Request["value1"]);
+            if ((isNew & File.Exists(path))|(!isNew & !File.Exists(path))) //created new file && but exist OR edit file but not exist
+            {
+                return;
+            }
+            string content = context.Request["content"];
+            StreamWriter sw = File.CreateText(path);
+            sw.Write(content);
+            sw.Close();
+            context.Response.Write("OK");
+
         }
         #endregion
     }
