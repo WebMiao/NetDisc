@@ -49,12 +49,12 @@ clickFile = function (fname) { //supply the function realization part in tree.js
 /****** Online Editing *******/
 /*****************************/
 var fileEditor = new Dialog();
-fileEditor.Content = "<div id='editorDiv>" + //deine the empty rich editor
-    "<input id = 'switchEditor' type='button' value='Switch Editor'/>" +
-    "<br />" +
-    "<textarea id='FileContentTextArea' cols='80' rows='30' style='width:600px; height:400px'></textarea>" +
+fileEditor.Content = "<div id='editorDiv'>" + //deine the empty rich editor
+    "<input id ='switchEditor' type='button' value='Switch Editor'/>" +
+    "<br />"+
+    "<textarea id='FileContentTextArea' name='FileContentTextArea' cols='80' rows='30' style='width:600px; height:400px'></textarea>" +
     "</div >";
-fileEditor.width = 600; //set the width
+fileEditor.width = 1000; //set the width
 
 var oCKeditor; //define a rich editor object
 var oEditor;  //define a rich editor instance
@@ -72,13 +72,13 @@ function switchEditor() {
     if (isRichEditor) {
         isRichEditor = false; //already get the content
         // create a new file
-
+        newFile();
     }
 }
 
 //get the content of the editor
 function getEditorContent() {
-    if (ifRichEditor) {
+    if (isRichEditor) {
         currentContent = oEditor.GetXHTML(true); //call the function defined in CKEditor
     } else {
         currentContent = textareaEditor.value;
@@ -177,7 +177,7 @@ editFile = function (fname) {
 
 //read the file on the server
 loadFileContent = function (fname) {
-    var url = defaultURL + "?action=GETEDITFILE&value1=" + encodeURIComponent(currentNode.path + fileName);
+    var url = defaultURL + "?action=GETEDITFILE&value1=" + encodeURIComponent(currentNode.path + fname);
     var content = executeHttpRequest("GET", url, null);
 
     if (content == "ERROR") {

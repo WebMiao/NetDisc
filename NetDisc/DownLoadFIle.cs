@@ -33,7 +33,7 @@ namespace NetDisc
             context.Response.ContentType = "application/octet-stream";
             //define the display method
             context.Response.AddHeader("Content-Disposition",
-                "attachmentfilename=" + HttpUtility.UrlEncode(fileName, System.Text.Encoding.UTF8));
+                "attachment; filename=" + HttpUtility.UrlEncode(fileName, System.Text.Encoding.UTF8));
 
             while(dataToRead > 0) //whether read into bit stream or not
             {
