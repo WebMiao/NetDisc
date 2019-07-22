@@ -198,3 +198,197 @@ loadFileContent = function (fname) {
     }
     return content;
 }
+
+//back to the last layer
+function gotoParentDirctory() {
+    if (currentNode != null) {
+        currentNode.gotoParentNote();
+    }
+}
+
+//go to the root dirctory
+function goRoot() {
+    currentNode = nd;
+    currentNode.Refresh();
+}
+
+//refresh from the current node
+function refresh() {
+    if (currentNode != null) {
+        currentNode.Refresh();
+    }
+}
+
+//select all the directory
+function selectAll() {
+    //get all the tag[button/label/checkbox/radiobutton...] in that page 
+    var checkBoxes = $("fileList").getElementsByTagName("input");
+
+    for (var i = 0; i < checkBoxes.length; i++) {
+        if (checkBoxes[i].type == "checkbox") {
+            checkBoxes[i].checked = $("checkAll").checked; //depend on the checkAll button
+        }
+    }
+}
+
+//New directory
+function newDirectory() {
+    dialog.Content = "<div><span>Please input the name of new directory: </span> " +
+        "<input id = 'dirName' type='textbox' style='width:100px;' /></div>";
+    dialog.Text = "New Directory"; //This is the title of dialog
+    dialog.Show();
+
+    var dir = $("dirName");
+    dir.focus();
+
+    dialog.OK = function () {
+        //if the format is wrong
+        if (!(/^[[\u4e00-\u9fa5_a-zA-Z0-9]+$/.test(dir.value))) {
+            dialog.Content = "<span style='color:red'>Directory Name is wrong!</span>";
+
+            dialog.OK = function () {
+                newDirectory();
+            }
+
+            dialog.Show(1);
+            return;
+        } else {
+            //the url for the asychronize call by server
+            var url = defaultURL + "?action=NEWDIR&value1=" + encodeURIComponent(currentNode.path);
+            var result = executeHttpRequest("GET", url, null);
+
+            if (result == "OK") {
+                currentNode.Refresh();
+                dialog.Content = "New Directory Successfully";
+                dialog.Show(1);
+                dialog.OK = dialog.Close;
+            } else {
+                dialog.Content = "<span tyle='color:red'>Fail to create new Directory, Please try again!</span>";
+                dialog.Show();
+
+                dialog.OK = function () {
+                    newDirectory();
+                }
+            }
+        }
+
+    }
+}
+
+// check the file name is valid
+function checkFileName() {
+    return (/^[\w\u4e00-\u9fa5-\.]+\.[a-zA-Z0-9]{1.8}$/.test($("inputFile").value));
+}
+
+//get the selected files which is checked
+function getSelectedFile() {
+    list = [];
+    var checkBoxes = $("fileList").getElementsByTagName("input");
+
+    for (var i = 0; i < checkBoxes.length; i++) {
+        if (checkBoxes[i].type == "checkbox") {
+            if (checkBoxes[i].checked) {
+                list.push(currentNode.path + checkBoxes[i].title);
+            }
+        }
+    }
+}
+
+//delete function
+function del() {
+    getSelectedFile();
+    dialog.Text = "Delete File(s)";
+
+    if (list.length <= 0) {
+        dialog.Content = "Please select the files want to be deleted first";
+
+        dialog.OK = dialog.Close;
+
+        dialog.Show(1);
+        return;
+    } else {
+        dialog.Content = "These files can not be recovered after deleting, confirm to continue?";
+        dialog.Show();
+
+        dialog.OK = function () {
+            var url = defaultURL + "?action=DELETE&value1=" + encodeURIComponent(list.join("|"));
+            var result = executeHttpRequest("GET", url, null);
+
+            if (result == "OK") {
+                currentNode.Refresh();
+
+                dialog.Content = "Delete Successfully";
+                dialog.OK = dialog.Close;
+                dialog.Show(1);
+            } else {
+                dialog.Content = "<span tyle='color:red'> Failed to delete, please try again!</span>";
+                dialog.Show(1);
+                currentNode.Refresh();
+                dialog.OK = dialog.Close;
+            }
+        }
+    }
+}
+
+function cut() {
+    getSelectedFile();
+    dialog.Text = "Cut Operation";
+
+    if (list.length < 1) {
+        dialog.Content = "Please select the files want to be cut first";
+    } else {
+        dialog.Content = "Already copy the following folders and/or files: <br />" +
+            "<div style='text-align:left;'>" + list.join("<br />") + "</div>";
+        cutCopyOperation = "CUT";
+        cutCopyFiles = list;
+    }
+
+    dialog.Show(1);
+    dialog.OK = dialog.Close;
+}
+
+function copy() {
+    getSelectedFile();
+    dialog.Text = "Copy Operation";
+
+    if (list.length < 1) {
+        dialog.Content = "Please select the files want to be copy first";
+    } else {
+        dialog.Content = "Already copy the following folders and/or files: <br />" +
+            "<div style='text-align:left;'>" + list.join("<br />") + "</div>";
+        cutCopyOperation = "COPY ";
+        cutCopyFiles = list;
+    }
+
+    dialog.Show(1);
+    dialog.OK = dialog.Close;
+}
+
+function paste() {
+    dialog.Text = "Paste";
+
+    if (cutCopyOperation != "CUT" && cutCopyOperation != "COPY" || cutCopyFiles.length < 1) {
+        dialog.Content = "clipboard has no folders and files";
+        dialog.OK = dialog.Close;
+        dialog.Show(1);
+        return;
+    }
+
+    dialog.Content = "Confrim to paste the following files at " + currentNode.path + "？<br />" +
+        "<div style='text-align:left';>" + cutCopyFiles.join("<br />")+"</div>";
+    dialog.Show();
+
+    dialog.OK = function () {
+        var url = defaultURL + "?action=" + cutCopyOperation + "&value1=" + encodeURIComponent(currentNode.path) + "&value2=" + encodeURIComponent(cutCopyFiles.join("|"));
+        var result = executeHttpRequest("GET", url, null);
+
+        if (result == "OK") {
+            dialog.Content = "The paste operation is successful";
+            currentNode.Refresh();
+        } else {
+            dialog.Content = "<span tyle='color:red'> Failed to paste, please try again!</span>";
+        }
+        dialog.Show(1);
+        dialog.OK = dialog.Close;
+    }
+}

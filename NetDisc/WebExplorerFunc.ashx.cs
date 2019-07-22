@@ -41,6 +41,14 @@ namespace NetDisc
                 case "SAVAEDITFILE": //save the editted file
                     SaveFile(context,false);
                     break;
+                case "NEWDIR": //new directiory
+                    break;
+                case "DELETE": //delete operation
+                    break;
+                case "CUT":
+                    break;
+                case "COPY":
+                    break;
                 }
         }
 
