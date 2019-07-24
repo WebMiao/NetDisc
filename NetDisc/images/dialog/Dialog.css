@@ -10,7 +10,7 @@
 {
 	-moz-user-select: none;
 	height: 26px;
-	background: url(title_bg.gif) repeat-x;
+	background: url(title.png) repeat-x;
 	cursor: move;
 }
 .Dialog_ico
@@ -18,10 +18,11 @@
 	margin: 5px;
 	float: left;
 }
-.Dialog_titleText
+.Dialog_titleText 
 {
-	padding-top: 7px;
-	float: left;
+    color: white;
+    padding-top: 7px;
+    float: left;
 }
 .Dialog_titleCloseButton
 {
@@ -45,11 +46,24 @@
 }
 .Dialog_commandButton
 {
+    color:white;
 	border: none;
 	margin-top: 10px;
 	margin-left: 20px;
 	margin-right: 20px;
 	width: 69px;
-	height: 24px;
-	background: url(btn_bg.gif) no-repeat;
+	height: 28px;
+	background: url(btn.png) no-repeat;
 }
+
+.Switch_btn {
+    color: white;
+    border: none;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100px;
+    height: 28px;
+    background: url(swbtn.png) no-repeat;
+}
+

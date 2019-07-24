@@ -30,7 +30,7 @@ function TreeNode()
     this.container = null;
     this.childArea = null;
     this.parent = null;
-    this.path = "~/"; //TestFiles/
+    this.path = "~/TestFiles/" + courseid+"/"; //TestFiles/
 
     this.Show = function()
     {
@@ -312,7 +312,7 @@ var createFileView = function(fileName, isFolder, fileSize, modifyDate)
             if (textFileType[i] == imgSource.toLowerCase())
             {
                 var editFileSpan = createSpan();
-                editFileSpan.innerHTML = "[编辑]";
+                editFileSpan.innerHTML = "[Edit]";
                 editFileSpan.style.color = "#ccc";
                 editFileSpan.style.paddingLeft = "5px";
                 editFileSpan.title = fileName;

@@ -44,7 +44,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>C:\Users\29175\Desktop\嘤嘤嘤\第一课网盘文档项目简介及项目演示\素材\素材\dll\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>C:\Users\HJF\Desktop\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
@@ -70,18 +70,147 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Course.aspx" />
+    <Content Include="Disk.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="images\ai.gif" />
+    <Content Include="images\archiveL.png" />
+    <Content Include="images\asax.gif" />
+    <Content Include="images\ascx.png" />
+    <Content Include="images\ashx.gif" />
+    <Content Include="images\asmx.gif" />
+    <Content Include="images\aspx.gif" />
+    <Content Include="images\avi.gif" />
+    <Content Include="images\bat.gif" />
+    <Content Include="images\bmp.gif" />
+    <Content Include="images\cab.gif" />
+    <Content Include="images\chat.png" />
+    <Content Include="images\chm.gif" />
+    <Content Include="images\cmd.gif" />
+    <Content Include="images\config.gif" />
+    <Content Include="images\copy.png" />
+    <Content Include="images\cs.png" />
+    <Content Include="images\css.png" />
+    <Content Include="images\cut.png" />
+    <Content Include="images\db.gif" />
+    <Content Include="images\delete.png" />
+    <Content Include="images\dialog\btnpanel_bg.gif" />
+    <Content Include="images\dialog\btn_bg.gif" />
+    <Content Include="images\dialog\close_highlight.png" />
+    <Content Include="images\dialog\close_normal.png" />
+    <Content Include="images\dialog\Dialog.css" />
+    <Content Include="images\dialog\icon.png" />
+    <Content Include="images\dialog\mask.gif" />
+    <Content Include="images\dialog\mask.png" />
+    <Content Include="images\dialog\title_bg.gif" />
+    <Content Include="images\dll.png" />
+    <Content Include="images\doc.png" />
+    <Content Include="images\download.png" />
+    <Content Include="images\edit.gif" />
+    <Content Include="images\empty.gif" />
+    <Content Include="images\exe.png" />
+    <Content Include="images\fla.gif" />
+    <Content Include="images\folder.png" />
+    <Content Include="images\gif.png" />
+    <Content Include="images\hlp.gif" />
+    <Content Include="images\home.png" />
+    <Content Include="images\htm.gif" />
+    <Content Include="images\html.png" />
+    <Content Include="images\ini.gif" />
+    <Content Include="images\iso.gif" />
+    <Content Include="images\jpg.png" />
+    <Content Include="images\js.png" />
+    <Content Include="images\log.gif" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\master.gif" />
+    <Content Include="images\mdb.gif" />
+    <Content Include="images\minus_m.gif" />
+    <Content Include="images\mp3.png" />
+    <Content Include="images\msi.gif" />
+    <Content Include="images\newfile.png" />
+    <Content Include="images\newfolder.png" />
+    <Content Include="images\openedfolder.png" />
+    <Content Include="images\openedfolderL.png" />
+    <Content Include="images\paste.png" />
+    <Content Include="images\pdb.gif" />
+    <Content Include="images\pdf.png" />
+    <Content Include="images\plus_m.gif" />
+    <Content Include="images\png.png" />
+    <Content Include="images\ppt.png" />
+    <Content Include="images\process.gif" />
+    <Content Include="images\rar.gif" />
+    <Content Include="images\rar.png" />
+    <Content Include="images\refresh.png" />
+    <Content Include="images\rename.gif" />
+    <Content Include="images\resx.gif" />
+    <Content Include="images\rm.gif" />
+    <Content Include="images\rmvb.gif" />
+    <Content Include="images\rtf.gif" />
+    <Content Include="images\sln.gif" />
+    <Content Include="images\swf.gif" />
+    <Content Include="images\ttf.gif" />
+    <Content Include="images\txt.png" />
+    <Content Include="images\unknow.gif" />
+    <Content Include="images\unzip.png" />
+    <Content Include="images\up.png" />
+    <Content Include="images\upload.png" />
+    <Content Include="images\vsd.gif" />
+    <Content Include="images\wma.png" />
+    <Content Include="images\wmv.gif" />
+    <Content Include="images\xaml.gif" />
+    <Content Include="images\xap.gif" />
+    <Content Include="images\xls.png" />
+    <Content Include="images\xlst.gif" />
+    <Content Include="images\xml.png" />
+    <Content Include="images\xsd.gif" />
+    <Content Include="images\xsx.gif" />
+    <Content Include="images\zip.png" />
+    <Content Include="images\zipfile.gif" />
     <Content Include="js\Ajax.js" />
     <Content Include="js\Common.js" />
     <Content Include="js\Dialog.js" />
     <Content Include="js\Tree.js" />
     <Content Include="js\WebExplorerMain.js" />
+    <Content Include="Login.aspx" />
+    <Content Include="Mainpage.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebExplorer.html" />
-    <Content Include="WebForm1.aspx" />
+    <Content Include="Register.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Course.aspx.cs">
+      <DependentUpon>Course.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Course.aspx.designer.cs">
+      <DependentUpon>Course.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Disk.aspx.cs">
+      <DependentUpon>Disk.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Disk.aspx.designer.cs">
+      <DependentUpon>Disk.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DownLoadFIle.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="js\ZipClass.cs" />
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Mainpage.aspx.cs">
+      <DependentUpon>Mainpage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mainpage.aspx.designer.cs">
+      <DependentUpon>Mainpage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
@@ -93,12 +222,12 @@
     <Compile Include="WebExplorerFunc.ashx.cs">
       <DependentUpon>WebExplorerFunc.ashx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -112,9 +241,7 @@
     </None>
     <Content Include="WebExplorerFunc.ashx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="images\dialog\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,6 +1,5 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Disk.aspx.cs" Inherits="NetDisc.Disk" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <meta charset="utf-8" />
     <title></title>
     <script>
@@ -17,8 +16,8 @@
     <link href="images/dialog/Dialog.css" rel="stylesheet" />
     <link href="css/WebExplorer.css" rel="stylesheet" />
     <script src="/ckeditor/ckeditor.js"></script>
-</head>
-<body>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div id="fileExplorer">
         <div id="tree"></div>
         <div id="rightPanel">
@@ -72,7 +71,7 @@
                 </div>
 
                 <div class="menuItem" onclick="javascript: zipFile();">
-                    <img src="images/zip.png" />
+                    <img src="images/archiveL.png" />
                     <div class="tipText">Zip File</div>
                 </div>
 
@@ -105,5 +104,4 @@
         </div>
     </div>
     <script src="js/WebExplorerMain.js"></script>
-</body>
-</html>
+</asp:Content>

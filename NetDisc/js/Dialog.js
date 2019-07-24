@@ -27,7 +27,7 @@ var Dialog = function()
         Close_Normal: this.ImagePath + "close_normal.png",
         Close_Higthlight: this.ImagePath + "close_highlight.png",
         Mask_Image: this.ImagePath + "mask.png",
-        Dialog_Icon: this.ImagePath + "icon.png"
+        Dialog_Icon: this.ImagePath + "myicon.png"
     };
 
     this.Remove = function()
@@ -88,7 +88,7 @@ var Dialog = function()
 
     this.titleCloseButton = createImg();
     this.titleCloseButton.className = "Dialog_titleCloseButton";
-    this.titleCloseButton.title = "关闭";
+    this.titleCloseButton.title = "Close";
     this.titleCloseButton.src = this.Icon.Close_Normal;
     this.titleBar.appendChild(this.titleCloseButton);
 
@@ -101,18 +101,18 @@ var Dialog = function()
     this.borderLine.appendChild(this.buttonPanel);
 
     this.ButtonOK = createBtn();
-    this.ButtonOK.value = "确 定";
+    this.ButtonOK.value = "OK";
     this.ButtonOK.className = "Dialog_commandButton";
     this.buttonPanel.appendChild(this.ButtonOK);
 
     this.ButtonRetry = createBtn();
-    this.ButtonRetry.value = "重 试";
+    this.ButtonRetry.value = "Retry";
     this.ButtonRetry.className = "Dialog_commandButton";
     this.ButtonRetry.style.diaplay = "none";
     this.buttonPanel.appendChild(this.ButtonRetry);
 
     this.ButtonCancel = createBtn();
-    this.ButtonCancel.value = "取 消";
+    this.ButtonCancel.value = "Cancel";
     this.ButtonCancel.className = "Dialog_commandButton";
     this.buttonPanel.appendChild(this.ButtonCancel);
 

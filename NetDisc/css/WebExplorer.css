@@ -1,21 +1,21 @@
 body, #fileExplorer
 {
 	padding: 0px;
-	margin: 0px;
+	margin: 0 auto;
 	width: 1000px;
 	font-size: 13px;
 }
 #tree
 {
-	width: 220px;
+    float:left;
+	width: 180px;
 	overflow-x: scroll;
-	float: left;
 	white-space: nowrap;
 }
 #rightPanel
 {
-	float: left;
-	width: 758px;
+    float:right;
+	width: 770px;
 }
 #path
 {
@@ -47,7 +47,7 @@ body, #fileExplorer
 .tipText
 {
 	width: 50px;
-	font-size: 13px;
+	font-size: 12px;
 	text-align: center;
 	height: 13px;
 }

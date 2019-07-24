@@ -1,4 +1,26 @@
-﻿//the main file communicate with page interface
+﻿//*****************************//
+//**get session and course id**//
+//*****************************//
+var username= function GetUserNameCourseid() {
+    return '<%= Session["UserName"] %>';
+}
+var userid = function GetUserNameCourseid() {
+    return '<%= Session["UID"] %>';
+    var type = '<%= Session["UserType"] %>';
+}
+var userid = function GetUserNameCourseid() {
+    return '<%= Session["UserType"] %>';
+}
+
+var parameter = function getUrlParameter(url, parameter) {
+    parameter = parameter.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?|&]' + parameter.toLowerCase() + '=([^&#]*)');
+    var results = regex.exec('?' + url.toLowerCase().split('?')[1]);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
+
+//the main file communicate with page interface
 
 //***********************//
 //** initialize a tree **//
@@ -11,7 +33,7 @@ var nd = new TreeNode();
 //specify a div tag/container
 nd.container = $("tree"); //place the tree to a <div> with ID named "tree"
 
-nd.text = "Net Disc";
+nd.text = coursename;
 
 //show the tree 
 nd.Show();
@@ -50,7 +72,7 @@ clickFile = function (fname) { //supply the function realization part in tree.js
 /*****************************/
 var fileEditor = new Dialog();
 fileEditor.Content = "<div id='editorDiv'>" + //deine the empty rich editor
-    "<input id ='switchEditor' type='button' value='Switch Editor'/>" +
+    "<input id ='switchEditor' type='button' value='Switch Editor' class='Switch_btn'/>" +
     "<br />"+
     "<textarea id='FileContentTextArea' name='FileContentTextArea' cols='80' rows='30' style='width:600px; height:400px'></textarea>" +
     "</div >";
@@ -151,7 +173,7 @@ function closeConfirm() {
 editFile = function (fname) {
     isRichEditor = false;
     currentEditFile = fname;
-    fileEditor.Text = "Edit File:" + fname;
+    fileEditor.Text = "Edit File: " + fname;
     fileEditor.Show(3);
 
     //find the elements of Editor
@@ -432,7 +454,7 @@ function uploadFile() {
 
 renameFile = function (fname) {
     dialog.Text = "Rename: " + fname;
-    dialog.Content = "Please enter new name: <input id='newName' type='textbox' style='width:1200px;'/>";
+    dialog.Content = "Please enter new name: <input id='newName' type='textbox' style='width:200px;'/>";
     dialog.Show();
 
     var txtNewName = $("newName");
