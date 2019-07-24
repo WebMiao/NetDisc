@@ -199,6 +199,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Mainpage.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="PrivateChat.aspx" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -314,6 +315,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Chat.cs" />
+    <Compile Include="ChatHub.cs" />
     <Compile Include="Course.aspx.cs">
       <DependentUpon>Course.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -353,6 +355,13 @@
     </Compile>
     <Compile Include="Mainpage.aspx.designer.cs">
       <DependentUpon>Mainpage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PrivateChat.aspx.cs">
+      <DependentUpon>PrivateChat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PrivateChat.aspx.designer.cs">
+      <DependentUpon>PrivateChat.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site1.Master.cs">

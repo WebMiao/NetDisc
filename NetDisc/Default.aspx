@@ -8,31 +8,36 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="width:900px; margin:0 auto">
     <div class="layui-layer-title" style="height:50px;text-align:center" >
-<%--        <asp:Image ID="chatroom" runat="server" ImageUrl="Icon/4.png" Height="100px" Width="200px"/>--%>
+        <!--<asp:Image ID="chatroom" runat="server" ImageUrl="Icon/4.png" Height="100px" Width="200px"/>-->
         <asp:Label ID="lbTitle" runat="server" Text="" Font-Names="Century Gothic" Font-Size="XX-Large" ForeColor="Black"></asp:Label>
-    </div>       <!--预留聊天室图片-->  <!--可以的话加上房间信息：名称--> 
+    </div>       
+<!--预留聊天室图片-->  <!--可以的话加上房间信息：名称--> 
 
-            <div class="layim-chat-box" > <div class="layim-chat layim-chat-friend layui-show">
-
-         <div style="display:none">
-        <asp:Image id="image" runat="server"  Height="55px" Width="64px"  /></div>   <!--预留去后端取数据的入口-->
-          <div style="display:none"> 
-              <input type="text" id="room" /> </div>
-           <div class="layim-chat-main" style="height: 450px;">
-            <ul id="dis"> </ul> </div>
-               <div class="layim-chat-footer">  <div class="layim-chat-textarea">
-            <textarea id="msg"  class="layui-textarea" style="max-width:100%"></textarea>
-                    </div> 
+    <div class="layim-chat-box" > 
+        <div class="layim-chat layim-chat-friend layui-show">
+            <div style="display:none">
+                <asp:Image id="image" runat="server"  Height="55px" Width="64px"  />
+            </div>   <!--预留去后端取数据的入口-->
+            <div style="display:none"> 
+                <input type="text" id="room" />
+            </div>
+            <div class="layim-chat-main" style="height: 450px;">
+                <ul id="dis"> </ul>
+            </div>
+            <div class="layim-chat-footer">  
+                <div class="layim-chat-textarea">
+                    <textarea id="msg"  class="layui-textarea" style="max-width:100%"></textarea>
+                </div> 
                 <div class="layim-chat-bottom">
-       <div class="layim-chat-send">
-            <span class="layim-send-btn" id="broadcast" layim-event="send" >Send</span>
-            <input type="hidden" id="name" /> 
-           </div></div> </div>
+                    <div class="layim-chat-send">
+                        <span class="layim-send-btn" id="broadcast" layim-event="send" >Send</span>
+                        <input type="hidden" id="name" /> 
+                    </div>
+                </div>
+            </div>
          </div> 
        </div>
-    </div>
-
-    
+    </div>    
 <script src="Scripts/jquery-3.3.1.js" type="text/javascript"></script>
 <script src="Scripts/jquery.signalR-2.2.2.min.js" type="text/javascript"></script>
 <script src="signalr/hubs" type="text/javascript"></script>

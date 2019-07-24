@@ -15,7 +15,7 @@ namespace NetDisc
         protected string UserType;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UID"] == null)s
+            if (Session["UID"] == null)
             {
                 Response.Redirect("Login.aspx?Backpage=MainPage");
             }
