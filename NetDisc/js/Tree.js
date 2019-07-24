@@ -30,7 +30,7 @@ function TreeNode()
     this.container = null;
     this.childArea = null;
     this.parent = null;
-    this.path = "~/TestFiles/";
+    this.path = "~/"; //TestFiles/
 
     this.Show = function()
     {

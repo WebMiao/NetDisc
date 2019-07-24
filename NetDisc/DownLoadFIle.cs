@@ -14,7 +14,7 @@ namespace NetDisc
         /// </summary>
         /// <param name="path"></param>
         /// <param name="context"></param>
-        public static void ResponseFile(string path, HttpContext context)
+        public static void ResponseFile(string path, HttpContext context,bool havefilename)
         {
             context = HttpContext.Current;
             Stream iStream = null; //define a bit stream
@@ -23,7 +23,15 @@ namespace NetDisc
             byte[] buffer = new byte[1024 * 1024]; 
             int length = 0;
             long dataToRead;
-            string fileName = Path.GetFileName(path); //get the specific file's name and extract tag
+            string fileName;
+            if (havefilename) {
+            fileName = Path.GetFileName(path); //get the specific file's name and extract tag
+            }
+            else
+            {
+                //for the brunch downloads, define a predefined name[not changed with the file name insize zip]
+                fileName = "download_" + DateTime.Now.ToString("yyyyMMddHHmmss")+".zip";
+            }
 
             //general file type
             iStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);

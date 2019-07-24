@@ -117,12 +117,14 @@ function newFile() {
 
 //save the new file 
 function saveNewFile() {
-    var result = saveFile("NEWFILE", $(inputFile).value);
+    var result = saveFile("NEWFILE", $("inputFile").value);
     dialog.Text = "Note";
     if (result == "OK") {
         dialog.Content = "The file is created successfully";
         currentNode.Refresh();
         fileEditor.Hide();
+        dialog.Show(1);
+        dialog.OK = dialog.Close;
     }
 }
 
@@ -202,7 +204,7 @@ loadFileContent = function (fname) {
 //back to the last layer
 function gotoParentDirctory() {
     if (currentNode != null) {
-        currentNode.gotoParentNote();
+        currentNode.GotoParentNode();
     }
 }
 
@@ -254,7 +256,7 @@ function newDirectory() {
             return;
         } else {
             //the url for the asychronize call by server
-            var url = defaultURL + "?action=NEWDIR&value1=" + encodeURIComponent(currentNode.path);
+            var url = defaultURL + "?action=NEWDIR&value1=" + encodeURIComponent(currentNode.path + dir.value);
             var result = executeHttpRequest("GET", url, null);
 
             if (result == "OK") {
@@ -277,7 +279,7 @@ function newDirectory() {
 
 // check the file name is valid
 function checkFileName() {
-    return (/^[\w\u4e00-\u9fa5-\.]+\.[a-zA-Z0-9]{1.8}$/.test($("inputFile").value));
+    return (/^[\w\u4e00-\u9fa5-\.]+\.[a-zA-Z0-9]{1,8}$/.test($("inputFile").value));
 }
 
 //get the selected files which is checked
@@ -320,6 +322,11 @@ function del() {
                 dialog.Content = "Delete Successfully";
                 dialog.OK = dialog.Close;
                 dialog.Show(1);
+            } else if (result == "NOTEMPTY") {
+                dialog.Content = "<span tyle='color:red'> The Selected Folder is not empty, please clear it first!</span>";
+                dialog.Show(1);
+                currentNode.Refresh();
+                dialog.OK = dialog.Close;
             } else {
                 dialog.Content = "<span tyle='color:red'> Failed to delete, please try again!</span>";
                 dialog.Show(1);
@@ -356,7 +363,7 @@ function copy() {
     } else {
         dialog.Content = "Already copy the following folders and/or files: <br />" +
             "<div style='text-align:left;'>" + list.join("<br />") + "</div>";
-        cutCopyOperation = "COPY ";
+        cutCopyOperation = "COPY";
         cutCopyFiles = list;
     }
 
@@ -366,7 +373,6 @@ function copy() {
 
 function paste() {
     dialog.Text = "Paste";
-
     if (cutCopyOperation != "CUT" && cutCopyOperation != "COPY" || cutCopyFiles.length < 1) {
         dialog.Content = "clipboard has no folders and files";
         dialog.OK = dialog.Close;
@@ -385,10 +391,198 @@ function paste() {
         if (result == "OK") {
             dialog.Content = "The paste operation is successful";
             currentNode.Refresh();
+        } else if (result == "EXIST") {
+            dialog.Content = "The file is already exists;"
         } else {
-            dialog.Content = "<span tyle='color:red'> Failed to paste, please try again!</span>";
+            dialog.Content = "<span tyle='color:red;'> Failed to paste, please try again!</span>";
         }
         dialog.Show(1);
         dialog.OK = dialog.Close;
+    }
+}
+
+var iframeOnload = function () { } //abstract function, like a interface
+
+function uploadFile() {
+    iframeOnload = function () { }
+    dialog.Content = "<iframe id='uploadFrm' frameborder='no' border='0' scrolling='no'"+
+        "allowtransparency = 'yes' onload = 'iframeOnload()' name = 'uploadFrm' style = 'width:0px;height:0px; display:none;' ></iframe >"+
+        "<form name = 'actionForm' id = 'actionForm' action = '" + defaultURL + "?action=UPLOAD&value1=" + currentNode.path + "' " +
+        "method = 'post' target = 'uploadFrm' enctype = 'multipart/form-data' >" +
+        "<input name='selectFile' width='150' type='file'/></form>" +
+        "<div id='uploadStatus' style='display:none;'></div><img src='images/process.gif'/>" +
+        "<div style='color:#ccc;'>Now is uploading! If long time no response, maybe the size of file is too big!</div>";
+    dialog.Text = "Upload File";
+    dialog.Show();
+
+    dialog.OK = function () {
+        iframeOnload = function () {
+            dialog.Text = "Note";
+            dialog.Content = "Upload File Successfully";
+            dialog.OK = dialog.Close;
+            dialog.Show(1);
+            currentNode.Refresh();
+        }
+
+        $("actionForm").submit();
+        $("actionForm").style.display = "none";
+        $("uploadStatus").style.display = "";
+    }
+}
+
+renameFile = function (fname) {
+    dialog.Text = "Rename: " + fname;
+    dialog.Content = "Please enter new name: <input id='newName' type='textbox' style='width:1200px;'/>";
+    dialog.Show();
+
+    var txtNewName = $("newName");
+    txtNewName.value = fname;
+    txtNewName.focus();
+
+    dialog.OK = function () {
+        if (!(/^[\w\u4e00-\u9fa5-\.]+[a-zA-Z0-9.]*$/.test(txtNewName.value))) {
+            dialog.Content = "<span style='color:red;'>The format of new file name is incorrect!</span>";
+
+            dialog.OK = function () {
+                renameFile(fname);
+            }
+
+            dialog.Show(1);
+            return;
+        } else {
+            var url = defaultURL + "?action=RENAME&value1=" + encodeURIComponent(currentNode.path + fname) +
+                "&value2=" + encodeURIComponent(currentNode.path + txtNewName.value);
+            var result = executeHttpRequest("GET", url, null);
+
+            if (result == "OK") {
+                currentNode.Refresh();
+                dialog.Content = "Rename Successfully!";
+                dialog.OK = dialog.Close;
+
+                dialog.Show(1);
+            } else {
+                dialog.Content = "<span tyle='color:red;'> Failed to rename, please try again!</span>";
+
+                dialog.OK = function () {
+                    renameFile(fname);
+                }
+
+                dialog.Show();
+            }
+        }
+    }
+}
+
+function zipFile() {
+    getSelectedFile();
+
+    if (list.length < 1) {
+        dialog.Text = "Note";
+        dialog.Content = "Please select the file and/or folders needs to be zip firstly";
+        dialog.Show(1);
+        dialog.OK = dialog.Close;
+        return;
+    }
+
+    dialog.Text = "Compress";
+    dialog.Content = "<span>Please input the zip file name:</span>" +
+        "<input id='inputFile' type='textbox' style='width:500px'/>";
+    dialog.Show(1);
+    dialog.OK = function () {
+        if (checkFileName()) {
+            var url = defaultURL + "?action=ZIP&value1=" + encodeURIComponent(currentNode.path + $("inputFile").value) + "&value2=" + encodeURIComponent(list.join("|"));
+            var result = executeHttpRequest("GET", url, null);
+
+            dialog.Text = "Note";
+
+            if (result == "OK") {
+                dialog.Content = "Compress Successfully";
+                currentNode.Refresh();
+            } else {
+                dialog.Content = "Fail to Compress!";
+            }
+
+            dialog.OK = dialog.Close;
+            dialog.Show(1);
+        } else {
+            dialog.Content = "The input file name is incorrect! Remember to write postfix!";
+            dialog.Text = "Note";
+            dialog.Show(1);
+
+            dialog.OK = function () {
+                dialog.Close();
+                zipFile();
+            }
+        }
+    }
+}
+
+function unzipFile() {
+    getSelectedFile();
+
+    if (list.length < 1) {
+        dialog.Text = "Note";
+        dialog.Content = "Please select the file and/or folders needs to be unzip firstly";
+        dialog.Show(1);
+        dialog.OK = dialog.Close;
+        return;
+    }
+
+    var url = defaultURL + "?action=UNZIP&value1=" + encodeURIComponent(currentNode.path) + "&value2=" + encodeURIComponent(list.join("|"));
+    var result = executeHttpRequest("GET", url, null);
+
+    dialog.Text = "Note";
+
+    if (result == "OK") {
+        dialog.Content = "Decompress Successfully";
+        currentNode.Refresh();
+    } else {
+        dialog.Content = "Fail to Decompress!";
+    }
+
+        dialog.OK = dialog.Close;
+        dialog.Show(1);
+}
+
+//download more than one files
+function downloadFiles() {
+    getSelectedFile();
+
+    dialog.Text = "Download";
+    if (list.length < 1) {
+        dialog.Text = "Note";
+        dialog.Content = "Please select the file and/or folders needs to be downloaded firstly";
+        dialog.Show(1);
+        dialog.OK = dialog.Close;
+        return;
+    }
+
+    window.onbeforeunload = function () { }
+    window.location.href = defaultURL + "?action=DOWNLOADS&value1=" + encodeURIComponent(list.join('|'));
+    window.onbeforeunload = function () {
+        return "Wrong";
+    }
+}
+
+$("tree").style.height = document.documentElement.clientHeight + "px";
+
+//ie6+ dynamic adjust
+if (document.compatMode != 'CSS1Compat') {
+    $("tree").style.height = document.body.clientHeight + "px";
+}
+
+//menuitem change the color when the cursor put on it
+//in big tag 'menuitem'to get the sub tag <div>
+var menuItems = $("menu").getElementsByTagName("div");
+
+for (var i = 0; i < menuItems.length; ++i) {
+    menuItems[i].onmouseover = function () {
+        this.style.color = "red";
+        this.style.backgroundColor = "#eef";
+    }
+
+    menuItems[i].onmouseout = function () {
+        this.style.color = "";
+        this.style.backgroundColor = "transparent";
     }
 }
