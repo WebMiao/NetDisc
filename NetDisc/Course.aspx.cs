@@ -22,7 +22,7 @@ namespace NetDisc
 
         protected void btnChat_Click(object sender, ImageClickEventArgs e)
         {
-
+            Response.Redirect("Default.aspx?coursename=" + name);
         }
 
         protected void btnFile_Click(object sender, ImageClickEventArgs e)
