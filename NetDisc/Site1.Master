@@ -20,14 +20,14 @@
                         <asp:Label ID="webtitle" runat="server" Text="Learn the World Today..." Font-Bold="True" Font-Italic="False" Font-Names="Berlin Sans FB Demi" Font-Size="XX-Large" ForeColor="Black"></asp:Label>
                     </div>
                     <div style=" width:700px; height:30px;">
-                        <asp:Menu ID="Menu1" runat="server"  DynamicHorizontalOffset="6" Font-Names="Century Gothic" Font-Size="Large" ForeColor="Black" StaticSubMenuIndent="20px" Orientation="Horizontal" BorderColor="#FF9900" Font-Bold="True" Font-Underline="True">
+                        <asp:Menu ID="Menu1" runat="server"  DynamicHorizontalOffset="6" Font-Names="Century Gothic" Font-Size="Large" ForeColor="Black" StaticSubMenuIndent="20px" Orientation="Horizontal" BorderColor="#FF9900" Font-Bold="True" Font-Underline="True" OnMenuItemClick="Menu1_MenuItemClick">
                             <DynamicHoverStyle BackColor="#990000" ForeColor="White" />
                             <DynamicMenuItemStyle HorizontalPadding="20px" VerticalPadding="20px" />
                             <DynamicMenuStyle BackColor="#FFFBD6" />
                             <DynamicSelectedStyle BackColor="#FFCC66" />
                             <Items>
                                 <asp:MenuItem  Text="My Courses" Value="course" NavigateUrl="MainPage.aspx"></asp:MenuItem>
-                                <asp:MenuItem  Text="Chatroom" Value="Politic" NavigateUrl="PrivateChat.aspx"></asp:MenuItem>
+                                <asp:MenuItem  Text="Chatroom"  NavigateUrl="PrivateChat.aspx"></asp:MenuItem>
                             </Items>
                             <StaticHoverStyle BackColor="#990000" ForeColor="White" />
                             <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />

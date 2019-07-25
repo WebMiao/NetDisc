@@ -31,7 +31,7 @@ namespace NetDisc
 
             if (res.Tables[0].Rows.Count != 0)
             {
-                Session["Username"] = res.Tables[0].Rows[0][1];
+                Session["UserName"] = res.Tables[0].Rows[0][1];
                 Session["UID"] = res.Tables[0].Rows[0][0];
                 Session["UserType"] = res.Tables[0].Rows[0][3];
                 //Message.Text = "Hi"+Session["Username"].ToString();

@@ -17,7 +17,9 @@ namespace NetDisc
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            
+            Session["UID"] = "";
+            Session["UserName"] = "";
+            Session["UserType"] = "";
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

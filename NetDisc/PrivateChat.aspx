@@ -56,9 +56,9 @@
             }
         });
 
-        $('#UserName').val('<%= Session["UserName"] %>');
-        //此处取用户SESSION！
-        userID = $("#UserName").val();
+        const un = '<%= Session["UserName"] %>';
+        $('#UserName').val(un);//此处取用户SESSION！
+        userID = $('#UserName').val();
         //建立与Server端的Hub的物件，Hub字母为小写！
         var chat = $.connection.chatHub;
         //取得所有上线清单
