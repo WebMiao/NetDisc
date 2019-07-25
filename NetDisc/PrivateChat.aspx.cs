@@ -10,16 +10,17 @@ namespace NetDisc
     public partial class PrivateChat : System.Web.UI.Page
     {
         protected string UserType;
+        protected string Uname;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UID"] == null)
             {
-                Response.Redirect("Login.aspx?Backpage=PrivateChat");
+                Response.Redirect("Login.aspx");
             }
             else
             {
                 UserType = Session["UserType"].ToString();
-            }
+            }  
         }
     }
 }

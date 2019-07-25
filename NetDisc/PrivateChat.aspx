@@ -2,18 +2,50 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="Scripts/layui/css/layui.css" rel="stylesheet" />
     <link href="Scripts/layui/css/layim.css" rel="stylesheet" />
+    <style type="text/css">
+        .auto-style1 {
+            width: 100px;
+            height: 40px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="width:900px; margin:0 auto">
-        <div class="layui-layer-title" style="height:100px;text-align:center" >
-            <asp:Image ID="chatroom" runat="server" ImageUrl="Icon/4.png" Height="100px" Width="200px"/> </div>     
-        <div class="layim-chat-box" > <div class="layim-chat layim-chat-friend layui-show">
-        <div style="display:none">
-            <asp:Image id="image" runat="server"  Height="55px" Width="64px"  /></div>   
-        <div class="layim-chat-main" style="height: 450px;">
+        <div style="float:right; width:200px">
+            <table id="chatList">
+                <tr>
+                    <td style="font-family:'Century Gothic'; Font-Size:Large;color: black;">                        Chat with: 
+                    <select id="box" style="width:100px;background-color:#0066CC ;font-family:'Century Gothic'; Font-Size:Large;color: white;text-align: center;border: 1px #1a1a1a solid;border-radius: 5px;">    <!--此处选择聊天对象,可改效果-->
+                        <option value="all">All</option>
+                    </select>
+                        
+                    </td>   
+                </tr>
+                <tr>
+                    <td style="background-color:#0066CC;width:200px; text-align:center; color:white;font-size:large" class="auto-style1">
+                        OnlineUser 
+                    </td>
+                </tr>
+                <tr>
+                    <td style="background-color:#B9D1EA; width:200px; height:300px; color:black; font-family:'Century Gothic'; Font-Size:Large; vertical-align:top">
+                        <ul id="list" style="list-style-type:circle"></ul>
+                    </td>
+                </tr>
+            </table>
+
+            <div style="margin-top: 6px; float: left;">
+        </div>
+        </div>
+        <div style="float:left;width:680px">
+            <div class="layui-layer-title" style="height:50px;text-align:center" >
+                <asp:Label ID="Label1" runat="server" Text="CHC Chat Room" Font-Names="Century Gothic" Font-Size="XX-Large" ForeColor="Black" Font-Bold="True"></asp:Label></div>     
+            <div class="layim-chat-box" > <div class="layim-chat layim-chat-friend layui-show">
+            <div style="display:none">
+                <asp:Image id="image" runat="server"  Height="55px" Width="64px"  /></div>   
+            <div class="layim-chat-main" style="height: 450px;">
             <ul id="messageList" ></ul></div>
-        <div class="layim-chat-footer">
-             <div class="layim-chat-textarea">
+            <div class="layim-chat-footer">
+            <div class="layim-chat-textarea">
                 <textarea id="message"  class="layui-textarea" style="max-width:100%"/></textarea>
              </div> 
         <div class="layim-chat-bottom">
@@ -21,22 +53,16 @@
             <span class="layim-send-btn" id="send" layim-event="send" />Send</span>
             <input type="hidden" id="name" /> 
         </div>
-        <div style="margin-top: 6px; float: left;">
-            <select id="box">    <!--此处选择聊天对象,可改效果-->
-                <option value="all">All</option>
-            </select>
-        </div>
         </div> </div> </div> </div> 
 
-    <div id="chatList" >   <!--此处取在线好友,改布局及效果-->
-        <p>OnlineUser</p>
-        <ul id="list"></ul>
-    </div> 
+
 
     <div style="display:none">
-        <asp:Label ID="UserName" runat="server"></asp:Label>
+        <input type="hidden" id="UserName" /> 
     </div>
     </div>
+        </div> 
+        
 
 <!--Reference the SignalR library. -->
 <script src="Scripts/jquery-3.3.1.min.js" ></script>
@@ -56,8 +82,7 @@
             }
         });
 
-        const un = '<%= Session["UserName"] %>';
-        $('#UserName').val(un);//此处取用户SESSION！
+        $('#UserName').val('<%= Session["UserName"] %>');
         userID = $('#UserName').val();
         //建立与Server端的Hub的物件，Hub字母为小写！
         var chat = $.connection.chatHub;

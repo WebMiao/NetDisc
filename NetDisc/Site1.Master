@@ -20,7 +20,7 @@
                         <asp:Label ID="webtitle" runat="server" Text="Learn the World Today..." Font-Bold="True" Font-Italic="False" Font-Names="Berlin Sans FB Demi" Font-Size="XX-Large" ForeColor="Black"></asp:Label>
                     </div>
                     <div style=" width:700px; height:30px;">
-                        <asp:Menu ID="Menu1" runat="server"  DynamicHorizontalOffset="6" Font-Names="Century Gothic" Font-Size="Large" ForeColor="Black" StaticSubMenuIndent="20px" Orientation="Horizontal" BorderColor="#FF9900" Font-Bold="True" Font-Underline="True" OnMenuItemClick="Menu1_MenuItemClick">
+                        <asp:Menu ID="Menu1" runat="server"  DynamicHorizontalOffset="6" Font-Names="Century Gothic" Font-Size="Large" ForeColor="Black" StaticSubMenuIndent="20px" Orientation="Horizontal" BorderColor="#FF9900" Font-Bold="True" Font-Underline="True" >
                             <DynamicHoverStyle BackColor="#990000" ForeColor="White" />
                             <DynamicMenuItemStyle HorizontalPadding="20px" VerticalPadding="20px" />
                             <DynamicMenuStyle BackColor="#FFFBD6" />
