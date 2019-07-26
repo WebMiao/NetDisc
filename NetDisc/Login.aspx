@@ -34,8 +34,10 @@
             <asp:Button ID="btnLogin" runat="server" Text="login" Font-Names="Century Gothic" Font-Size="Medium" ForeColor="White" BackColor="#666666" BorderStyle="None" Width="130px" OnClick="btnLogin_Click"/>
             
         </div>
-        <div style="margin:0 auto; width:400px; padding-top:10px">
-                <asp:Label ID="Message" runat="server" Text="" Font-Names="Century Gothic" Font-Size="Medium" ForeColor="Red"></asp:Label>
+        <div style="width:400px; padding-top:10px; margin-left: auto; margin-right: auto; margin-top: 0;">
+            <asp:Label ID="Message" runat="server" Text="" Font-Names="Century Gothic" Font-Size="Medium" ForeColor="Red"></asp:Label>
+            <br />
+            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Don't have account? Register here!</asp:LinkButton>
         </div>
     </div>
 

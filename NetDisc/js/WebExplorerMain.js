@@ -59,7 +59,7 @@ dialog.DialogZIndex = 111; //far away
 /**** Download Operation *****/
 /*****************************/
 clickFile = function (fname) { //supply the function realization part in tree.js
-    window.onbeforeunload = function () { }
+    //window.onbeforeunload = function () { }//Onbeforeunload也是在页面刷新或关闭时调用，是正要去服务器读 取新的页面时调用，此时还没开始读取
     window.location = defaultURL + "?action=DOWNLOAD&value1=" + encodeURIComponent(currentNode.path + fname);
     alter(window.location);
     window.onbeforeunload = function () {

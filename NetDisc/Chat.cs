@@ -17,7 +17,7 @@ namespace NetDisc
         {
             // Call the addMessage method on all clients            
             //Clients.All.addMessage(message.Msg);
-            Clients.Group(message.Group).addMessage(message.Group, message.Msg, message.Name);
+            Clients.Group(message.Group).addMessage(message.Group, message.Msg, message.Name,message.url);
         }
     }
 
@@ -27,6 +27,7 @@ namespace NetDisc
         public string Msg { get; set; }
         public string Group { get; set; }
         public string Name { get; set; }
+        public string url  { get; set; }
 
         //头像地址
     }

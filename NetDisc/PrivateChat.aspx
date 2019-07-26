@@ -60,6 +60,9 @@
     <div style="display:none">
         <input type="hidden" id="UserName" /> 
     </div>
+      <div style="display:none">
+        <input type="hidden" id="url" /> 
+    </div>
     </div>
         </div> 
         
@@ -74,16 +77,12 @@
 
     $(function () {
         //回车查询
-        var $inp = $('input:text');
-        $inp.bind('keydown', function (e) {
-            var key = e.which;
-            if (key == 13) {
-                $('#send').click();
-            }
-        });
+        
 
         $('#UserName').val('<%= Session["UserName"] %>');
+        $('#url').val('<%= Session["url"] %>');
         userID = $('#UserName').val();
+        url = $('#url').val();
         //建立与Server端的Hub的物件，Hub字母为小写！
         var chat = $.connection.chatHub;
         //取得所有上线清单
@@ -111,16 +110,16 @@
 
 
         //全体聊天
-        chat.client.sendAllMessge = function (message, name) {
+        chat.client.sendAllMessge = function (message,name,url) {
 
             var encodedName = $('<div />').text(name).html();
             var encodedMsg = $('<div />').text(message).html();
             if (name == $('#UserName').val()) {
-                $('#messageList').append('<li class="layim-chat-mine"><div class="layim-chat-user"><img src="Icon/3.png"/><cite><i>' + getNowFormatDate() + '</i>' + encodedName +
+                $('#messageList').append('<li class="layim-chat-mine"><div class="layim-chat-user"><img src="'+url+'"/><cite><i>' + getNowFormatDate() + '</i>' +''+encodedName +
                     '</cite></div> <div class="layim-chat-text">' + encodedMsg + '</div> </li >');
             }
             else {
-                $('#messageList').append('<li><div class="layim-chat-user"><img src="Icon/4.png"/><cite>' + encodedName + ' [secrect] '+ getNowFormatDate() + '<i>' //bug here
+                $('#messageList').append('<li><div class="layim-chat-user"><img src="'+url+'"/><cite>' + encodedName +' '+ getNowFormatDate() + '<i>' //bug here
                     + '</i></cite></div><div class="layim-chat-text">' + encodedMsg + '</div></li>');
             }
 
@@ -129,15 +128,15 @@
         }
 
         //私密聊天
-        chat.client.sendMessage = function (message, name) {
+        chat.client.sendMessage = function (message, name,url) {
             var encodedName = $('<div />').text(name).html();
             var encodedMsg = $('<div />').text(message).html();
             if (name == $('#UserName').val()) {
-                $('#messageList').append('<li class="layim-chat-mine"><div class="layim-chat-user"><img src="Icon/3.png"/><cite><i>' + getNowFormatDate() + '</i>' + encodedName+' [secrect] '+
+                $('#messageList').append('<li class="layim-chat-mine"><div class="layim-chat-user"><img src="'+url+'"/><cite><i>' + getNowFormatDate() + '</i>' + encodedName+' [secrect] '+
                     '</cite></div> <div class="layim-chat-text">' + encodedMsg+ '</div> </li >');
             }
             else {
-                $('#messageList').append('<li><div class="layim-chat-user"><img src="Icon/4.png"/><cite>' + encodedName + ' [secrect] '+getNowFormatDate() + '<i>' //bug here
+                $('#messageList').append('<li><div class="layim-chat-user"><img src="'+url+'"/><cite>' + encodedName + ' [secrect] '+getNowFormatDate() + '<i>' //bug here
                     + '</i></cite></div><div class="layim-chat-text">' + encodedMsg + '</div></li>');
             }
            // $("#messageList").append("<li>" + message+name+ "</li>");
@@ -149,7 +148,12 @@
 
        
         $.connection.hub.start().done(function () {
-           
+
+            $(document).keypress(function (e) {  //按Enter键发送
+                if (e.keyCode == 13) {
+                    $('#send').click();
+                }
+            })
             chat.server.userConnected(userID);
         });;
 
@@ -157,9 +161,9 @@
             var to = $("#box").val();
             //all 为全体，否则为私密
             if (to == "all") {
-                chat.server.sendAllMessage($("#message").val());
+                chat.server.sendAllMessage($("#message").val(),url);
             } else {
-                chat.server.sendMessage(to, $("#message").val());
+                chat.server.sendMessage(to, $("#message").val(),url);
             }
             $("#message").val('');
         });

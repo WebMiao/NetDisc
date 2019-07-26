@@ -43,20 +43,20 @@ namespace NetDisc
                 insert_cmd.Parameters.Add("@UN", SqlDbType.VarChar, 10).Value = tbUsername.Text;
                 insert_cmd.Parameters.Add("@PW", SqlDbType.VarChar, 10).Value = tbPassword.Text;
 
-                if (rbUser.Checked == true)
-                    insert_cmd.Parameters.Add("@UT", SqlDbType.VarChar, 10).Value = "user";
+                if (rbTeacher.Checked == true)
+                    insert_cmd.Parameters.Add("@UT", SqlDbType.VarChar, 10).Value = "teacher";
                 else
-                    insert_cmd.Parameters.Add("@UT", SqlDbType.VarChar, 10).Value = "author";
+                    insert_cmd.Parameters.Add("@UT", SqlDbType.VarChar, 10).Value = "student";
                 insert_cmd.ExecuteNonQuery();
                 insert_cmd.Dispose();
 
                 //Message.Text = "Successful Registration! Enjoy Reading!";
 
-                Message.Text = "Successful Regodtration! Now redirecting in 5 second...";
+                Message.Text = "Successful Regodtration! Now redirecting in 3 second...";
                 Message.ForeColor = ColorTranslator.FromHtml("#037203");
 
                 ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "redirectJS",
-                "setTimeout(function() { window.location.replace('Login.aspx') }, 5000);", true);
+                "setTimeout(function() { window.location.replace('Login.aspx') }, 3000);", true);
             }
 
         }
@@ -65,8 +65,8 @@ namespace NetDisc
         {
             tbUsername.Text = null;
             tbPassword.Text = null;
-            rbUser.Checked = false;
-            rbAuthor.Checked = false;
+            rbTeacher.Checked = false;
+            rbStudent.Checked = false;
         }
     }
 }

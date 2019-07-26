@@ -97,7 +97,12 @@
     <Content Include="Course.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Disk.aspx" />
+    <Content Include="Enroll.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Icon\1.jpg" />
+    <Content Include="Icon\2.jpg" />
+    <Content Include="Icon\3.png" />
+    <Content Include="Icon\4.png" />
     <Content Include="images\ai.gif" />
     <Content Include="images\archiveL.png" />
     <Content Include="images\asax.gif" />
@@ -105,6 +110,7 @@
     <Content Include="images\ashx.gif" />
     <Content Include="images\asmx.gif" />
     <Content Include="images\aspx.gif" />
+    <Content Include="images\aspx.png" />
     <Content Include="images\avi.gif" />
     <Content Include="images\bat.gif" />
     <Content Include="images\bmp.gif" />
@@ -129,7 +135,7 @@
     <Content Include="images\dialog\mask.png" />
     <Content Include="images\dialog\title_bg.gif" />
     <Content Include="images\dll.png" />
-    <Content Include="images\doc.png" />
+    <Content Include="images\docx.png" />
     <Content Include="images\download.png" />
     <Content Include="images\edit.gif" />
     <Content Include="images\empty.gif" />
@@ -161,7 +167,7 @@
     <Content Include="images\pdf.png" />
     <Content Include="images\plus_m.gif" />
     <Content Include="images\png.png" />
-    <Content Include="images\ppt.png" />
+    <Content Include="images\pptx.png" />
     <Content Include="images\process.gif" />
     <Content Include="images\rar.gif" />
     <Content Include="images\rar.png" />
@@ -338,6 +344,13 @@
       <DependentUpon>Disk.aspx</DependentUpon>
     </Compile>
     <Compile Include="DownLoadFIle.cs" />
+    <Compile Include="Enroll.aspx.cs">
+      <DependentUpon>Enroll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Enroll.aspx.designer.cs">
+      <DependentUpon>Enroll.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

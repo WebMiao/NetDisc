@@ -18,6 +18,19 @@ namespace NetDisc
             name = Request.QueryString["coursename"];
             lbNewsTitle.Text = name;
             //Show();
+
+            SqlConnection conn = new SqlConnection("server=LAPTOP-MSQV6S42\\SQLEXPRESS;UID=sa;Password=123;Database=WebDisk");
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("select * from courses where coursename=@CN", conn);
+            cmd.Parameters.Add("@CN", SqlDbType.VarChar).Value = name;
+
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            DataSet res = new DataSet();
+            adapter.Fill(res);
+
+            lbDescription.Text = res.Tables[0].Rows[0][3].ToString();
+
         }
 
         protected void btnChat_Click(object sender, ImageClickEventArgs e)

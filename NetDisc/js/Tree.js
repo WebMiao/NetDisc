@@ -242,12 +242,12 @@ var createFileView = function(fileName, isFolder, fileSize, modifyDate)
     if (isFolder)
     {
         fileImg = createImage(imgPath + "openedfolder.png");
-        fileImg.alt = "文件夹";
+        fileImg.alt = "Folder";
     }
     else
     {
         fileImg = createImage(imgPath + imgSource + ".png");
-        fileImg.alt = imgSource + "文件";
+        fileImg.alt = imgSource + "Folder";
     }
 
     fileImg.onerror = function()
@@ -255,7 +255,7 @@ var createFileView = function(fileName, isFolder, fileSize, modifyDate)
         try
         {
             this.src = image.Unknown;
-            this.alt = "未知类型文件";
+            this.alt = "Unknown Type";
         }
         catch (e)
         { }
@@ -313,7 +313,7 @@ var createFileView = function(fileName, isFolder, fileSize, modifyDate)
             {
                 var editFileSpan = createSpan();
                 editFileSpan.innerHTML = "[Edit]";
-                editFileSpan.style.color = "#ccc";
+                editFileSpan.style.color = "#0066CC";
                 editFileSpan.style.paddingLeft = "5px";
                 editFileSpan.title = fileName;
                 try { editFileSpan.style.cursor = "pointer"; } catch (e) { editFileSpan.style.cursor = "hand"; }
@@ -327,7 +327,7 @@ var createFileView = function(fileName, isFolder, fileSize, modifyDate)
 
                 editFileSpan.onmouseout = function()
                 {
-                    this.style.color = "#ccc";
+                    this.style.color = "#0066CC";
                     this.style.textDecoration = "none";
                 }
 

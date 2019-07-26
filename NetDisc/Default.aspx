@@ -37,7 +37,10 @@
             </div>
          </div> 
        </div>
-    </div>    
+    </div>
+     <div style="display:none">
+        <input type="hidden" id="url" /> 
+    </div>
 <script src="Scripts/jquery-3.3.1.js" type="text/javascript"></script>
 <script src="Scripts/jquery.signalR-2.2.2.min.js" type="text/javascript"></script>
 <script src="signalr/hubs" type="text/javascript"></script>
@@ -47,17 +50,17 @@
             var chat = $.connection.chat;
 
             // declare a function on the chat hub so the server can invoke it          
-            chat.client.addmessage = function (group, message, name) {
+            chat.client.addmessage = function (group, message, name,url) {
                 var mydate = new Date();
                 var datestr = mydate.toDateString();
                 var encodedName = $('<div />').text(name).html();
                 var encodedMsg = $('<div />').text(message).html();
                 if (name == $('#name').val()) {
-                    $('#dis').append('<li class="layim-chat-mine"><div class="layim-chat-user"><img src="Icon/3.png"/><cite><i>' + getNowFormatDate() + '</i>' + encodedName +
+                    $('#dis').append('<li class="layim-chat-mine"><div class="layim-chat-user"><img src="'+url+'"/><cite><i>' + getNowFormatDate() + '</i>' + encodedName +
                         '</cite></div> <div class="layim-chat-text">' + encodedMsg + '</div> </li >');
                 }
                 else {
-                    $('#dis').append('<li><div class="layim-chat-user"><image src=' + $('#image').attr("src") + '><cite>' + encodedName+getNowFormatDate() + '<i>' 
+                    $('#dis').append('<li><div class="layim-chat-user"><image src="'+url+'"/><cite>' + encodedName+' '+getNowFormatDate() + '<i>' 
                         + '</i></cite></div><div class="layim-chat-text">' + encodedMsg + '</div></li>');
                 }
 
@@ -72,8 +75,10 @@
             const urlParams = new URLSearchParams(window.location.search);
             const coursename = urlParams.get('coursename');
             const courseid = urlParams.get('courseid');
+            $('#url').val('<%= Session["url"] %>');
             $('#room').val(coursename);
             $('#name').val('<%= Session["UserName"] %>');
+            url = $('#url').val();
 
             $.connection.hub.start(function () {
                 chat.server.join($('#room').val());
@@ -90,7 +95,7 @@
                 $("#broadcast").click(function () {
                     // call the chat method on the server
                     //chat.server.send($('#msg').val());
-                    chat.server.send({ msg: $('#msg').val(), group: $('#room').val(), name: $('#name').val() }); // +url作为参数回传
+                    chat.server.send({ msg: $('#msg').val(), group: $('#room').val(), name: $('#name').val(), url: $('#url').val()}); // +url作为参数回传
                     $('#msg').val('').focus();
                 });
             });

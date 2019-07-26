@@ -67,22 +67,22 @@ namespace NetDisc {
         protected global::System.Web.UI.WebControls.Label lbUsertype;
         
         /// <summary>
-        /// rbUser 控件。
+        /// rbTeacher 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbUser;
+        protected global::System.Web.UI.WebControls.RadioButton rbTeacher;
         
         /// <summary>
-        /// rbAuthor 控件。
+        /// rbStudent 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbAuthor;
+        protected global::System.Web.UI.WebControls.RadioButton rbStudent;
         
         /// <summary>
         /// btnClear 控件。

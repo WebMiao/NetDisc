@@ -34,15 +34,16 @@ namespace NetDisc
                 Session["UserName"] = res.Tables[0].Rows[0][1];
                 Session["UID"] = res.Tables[0].Rows[0][0];
                 Session["UserType"] = res.Tables[0].Rows[0][3];
+                Session["url"] = res.Tables[0].Rows[0][5];
                 //Message.Text = "Hi"+Session["Username"].ToString();
                 if (Request["Backpage"] != null)
-                    Response.Redirect(Request["Backpage"] + ".aspx");
+                    Response.Redirect(Request["Backpage"]);
                 else
                     Response.Redirect("Mainpage.aspx");
             }
             else
             {
-                Message.Text="OOPs! Invalid username or password! ";
+                Message.Text = "OOPs! Invalid username or password! ";
             }
         }
 
@@ -50,6 +51,11 @@ namespace NetDisc
         {
             tbPassword.Text = null;
             tbUsername.Text = null;
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Register.aspx");
         }
     }
 }

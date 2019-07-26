@@ -33,22 +33,22 @@ namespace NetDisc
         }
 
         //发送信息给所有人
-        public void sendAllMessage(string message)
+        public void sendAllMessage(string message,string url)
         {
             //   message = HttpUtility.HtmlEncode(message);
             var name = UserHandler.ConnectedIds.Where(p => p.Key == Context.ConnectionId).FirstOrDefault().Value;
             //  message = name + "说：" + message;
-            Clients.All.sendAllMessge(message, name);
+            Clients.All.sendAllMessge(message, name,url);
         }
 
         //发送信息给特定人
-        public void sendMessage(string ToId, string message)
+        public void sendMessage(string ToId, string message,string url)
         {
             // message = HttpUtility.HtmlEncode(message);
             var fromName = UserHandler.ConnectedIds.Where(p => p.Key == Context.ConnectionId).FirstOrDefault().Value;
             // message = fromName + " <span style='color:red'>悄悄说</span>：" + message;
-            Clients.Client(ToId).sendMessage(message, fromName);
-            Clients.Client(Context.ConnectionId).sendMessage(message, fromName);
+            Clients.Client(ToId).sendMessage(message, fromName,url);
+            Clients.Client(Context.ConnectionId).sendMessage(message, fromName,url);
         }
 
     }
